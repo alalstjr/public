@@ -1,3 +1,5 @@
 import Header from './Header';
+import Authentication from './Authentication';
+import Write from './Write';
 
-export { Header };
+export { Header, Authentication, Write };

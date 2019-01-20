@@ -1,6 +1,9 @@
 import express from 'express';
 import path from 'path';
 
+import morgan from 'morgan'; // HTTP REQUEST LOGGER
+import bodyParser from 'body-parser'; // PARSE HTML BODY
+
 import mongoose from 'mongoose';
 import session from 'express-session';
 
@@ -27,6 +30,10 @@ app.use(session({
 }));
 
 const devPort = 4000;
+
+app.use(morgan('dev'));
+app.use(bodyParser.json());
+
 /*
     Express Codes 
 */

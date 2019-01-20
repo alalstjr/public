@@ -14,8 +14,11 @@ const router = express.Router();
 router.post('/signup', (req, res) => {
     // CHECK USERNAME FORMAT
     let usernameRegex = /^[a-z0-9]+$/;
+    // 소문자 a-z 와 숫자 0-9 를 정규식으로 표현
 
     if(!usernameRegex.test(req.body.username)) {
+        // 위 변수 정규식에 test RegExp.prototype.test() 돌려
+        // 조건에 맞지 않으면 한글이나 특수문자가 있다면 fail 을 반환
         return res.status(400).json({
             error: "BAD USERNAME",
             code: 1
@@ -74,6 +77,9 @@ router.post('/signin', (req, res) => {
 
     // FIND THE USER BY USERNAME
     Account.findOne({ username: req.body.username}, (err, account) => {
+        // mongoose findOne은 query 조건에 부합하는 데이타중에 하나만 리턴하는 함수
+        // model 의 Account 을 탐색
+
         if(err) throw err;
 
         // CHECK ACCOUNT EXISTANCY

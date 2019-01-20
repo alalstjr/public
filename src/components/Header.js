@@ -7,15 +7,15 @@ class Header extends React.Component {
         
         const loginButton = (
             <li>
-                <a>
+                <Link to="/login">
                     <i className="material-icons">vpn_key</i>
-                </a>
+                </Link>
             </li>
         );
 
         const logoutButton = (
             <li>
-                <a>
+                <a onClick={this.props.onLogout}>
                     <i className="material-icons">lock_open</i>
                 </a>
             </li>
@@ -32,12 +32,7 @@ class Header extends React.Component {
 
                     <div className="right">
                         <ul>
-                            <li>
-                                <a><i className="material-icons">vpn_key</i></a>
-                            </li>
-                            <li>
-                                <a><i className="material-icons">lock_open</i></a>
-                            </li>
+                            { this.props.isLoggedIn ? logoutButton : loginButton }
                         </ul>
                     </div>
                 </div>
@@ -51,15 +46,15 @@ const propTypes = {
     onLogout : PropTypes.func // 함수형 props 로서 로그아웃을 담당
 }
 
-Header.propTypes = propTypes;
-Header.defaultProps = defaultProps;
-
 const warning = (funcName) => {
-    return () => console.warn(`funcName is not defined`);
+    return () => console.warn(`${funcName} is not defined`);
 };
 const defaultProps = {
     isLoggedIn : false,
     onLogout : warning('onLogout')
 };
+
+Header.propTypes = propTypes;
+Header.defaultProps = defaultProps;
 
 export default Header;
