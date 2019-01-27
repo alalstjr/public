@@ -13,7 +13,7 @@ import webpack from 'webpack';
 import api from './routes';
 
 const app = express();
-const port = 3000
+const port = process.env.PORT
 
 /* mongodb connection */
 const db = mongoose.connection;

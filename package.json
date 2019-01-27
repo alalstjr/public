@@ -75,7 +75,7 @@
     "workbox-webpack-plugin": "3.6.3"
   },
   "scripts": {
-    "start:dev": "node scripts/start.js",
+    "start": "node scripts/build.js&&babel server --out-dir build/server&&node build/server/index.js",
     "start:real": "babel server --out-dir build/server&&node build/server/index.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js --env=jsdom",
