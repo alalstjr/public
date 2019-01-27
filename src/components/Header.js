@@ -1,8 +1,29 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from "react-router-dom";
+import { Search } from 'components';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 
 class Header extends React.Component {
+    constructor(props) {
+        super(props);
+        
+        this.state = {
+            search : false
+        }
+    }
+
+    // 구현 : 검색 상태를 전환하는 toggleSearch 메소드 작성
+    toggleSearch = () => {
+        let setState = () => {
+            this.setState({
+                search : !this.state.search
+            });
+        }
+
+        this.state.search ? setState() : setState();
+    }
+
     render() {
         
         const loginButton = (
@@ -22,21 +43,39 @@ class Header extends React.Component {
         );
         
         return (
-            <nav>
-                <div className="nav-wrapper blue darken-1">
-                    <Link to="/" className="brand-logo center">MEMOPAD</Link>
-
-                    <ul>
-                        <li><a><i className="material-icons">search</i></a></li>
-                    </ul>
-
-                    <div className="right">
+            <div>
+                <nav>
+                    <div className="nav-wrapper blue darken-1">
+                        <Link to="/" className="brand-logo center">MEMOPAD</Link>
                         <ul>
-                            { this.props.isLoggedIn ? logoutButton : loginButton }
+                            <li>
+                                <a onClick={this.toggleSearch}>
+                                    <i className="material-icons">search</i>
+                                </a>
+                            </li>
                         </ul>
+
+                        <div className="right">
+                            <ul>
+                                { this.props.isLoggedIn ? logoutButton : loginButton }
+                            </ul>
+                        </div>
                     </div>
-                </div>
-            </nav>
+                </nav>
+                <ReactCSSTransitionGroup 
+                transitionName="search" 
+                transitionEnterTimeout={300} 
+                transitionLeaveTimeout={300}>
+                    {this.state.search ? 
+                        <Search 
+                            onClose={this.toggleSearch}
+                            usernames={this.props.usernames}
+                            onSearch = {this.props.onSearch}
+                            searchStatus = {this.props.searchStatus}
+                        /> : undefined 
+                    }
+                </ReactCSSTransitionGroup>
+            </div>
         );
     }
 }

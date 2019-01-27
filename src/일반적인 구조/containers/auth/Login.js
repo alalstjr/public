@@ -2,14 +2,13 @@
 import React from 'react';
 import { Authentication } from 'components';
 import { connect } from 'react-redux';
-import { loginRequest } from 'module/auth_api';
+import { loginRequest } from 'actions/auth';
 import { withRouter } from 'react-router-dom';
 
 import $ from 'jquery';
 import Materialize from 'materialize-css';
 
 class Login extends React.Component {
-
     constructor(props) {
         super(props);
         this.handleLogin = this.handleLogin.bind(this);
@@ -33,9 +32,8 @@ class Login extends React.Component {
                     // 로그인이 성공하면, 세션 데이터를 쿠키에 저장
                     // btoa는 JavaScript의 base64 인코딩 함수
 
-                    // Materialize.toast('Welcome, ' + id + '!', 2000);
+                    Materialize.toast('Welcome, ' + id + '!', 2000);
                     // Material.toast 는 Materializecss 프레임워크의 알림 기능
-                    
                     this.props.history.push("/");
                     // withRouter 를 통하여 라우팅을 트리거 할 수 있습니다 
                     // Link 를 누른것과 똑같은 효과, 이를 사용하기 위해 상단에 import

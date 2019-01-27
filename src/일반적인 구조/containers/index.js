@@ -6,7 +6,5 @@
 
 export { default as App } from './App';
 export { default as Home } from './Home';
-export { default as Wall } from './Wall';
-
 export { default as Login } from './auth/Login';
 export { default as Register } from './auth/Register';

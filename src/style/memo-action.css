@@ -1,0 +1,128 @@
+/* memo-enter */
+@-webkit-keyframes memo-enter {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+}
+
+@keyframes memo-enter {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+}
+
+.memo-enter {
+    -webkit-animation-duration: 2s;
+    animation-duration: 2s;
+    -webkit-animation-name: memo-enter;
+    animation-name: memo-enter;
+}
+
+/* memo-leave */
+body {
+    background-color: #ECEFF1;
+    overflow-x: hidden; 
+    /* 메모가 삭제될때 가로 스크롤바가 페이지에 만들어지지 않도록 
+    style의 최상단에 overflow-x 를 hidden으로 설정합니다. */
+}
+
+@-webkit-keyframes memo-leave {
+    0% {
+      opacity: 1;
+      max-height: 1080px;
+    }
+    50% {
+      opacity: 0;
+       -webkit-transform: translateX(100px);
+    }
+    100% {
+        max-height: 0px;
+    }
+}
+
+@keyframes memo-leave {
+    0% {
+      opacity: 1;
+      max-height: 1080px;
+    }
+    50% {
+      opacity: 0;
+      transform: translateX(100px);
+    }
+    100% {
+        max-height: 0px;
+    }
+}
+
+.memo-leave {
+    max-height: 0px;
+    opacity: 0;
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-name: memo-leave;
+    animation-name: memo-leave;
+}
+
+@-webkit-keyframes search-enter {
+    0% {
+      opacity: 0;
+      height: 0%;
+    }
+    100% {
+      opacity: 1;
+      height: 100%;
+    }
+}
+
+@keyframes search-enter {
+    0% {
+      opacity: 0;
+      height: 0%;
+    }
+    100% {
+      opacity: 1;
+      height: 100%;
+    }
+}
+
+.search-enter {
+    -webkit-animation-duration: 0.3s;
+    animation-duration: 0.3s;
+    -webkit-animation-name: search-enter;
+    animation-name: search-enter;
+}
+
+@-webkit-keyframes search-leave {
+    0% {
+      opacity: 1;
+      height: 100%;
+    }
+    100% {
+      opacity: 0;
+      height: 0%;
+    }
+}
+
+@keyframes search-leave {
+    0% {
+      opacity: 1;
+      height: 100%;
+    }
+    100% {
+      opacity: 0;
+      height: 0%;
+    }
+}
+
+.search-leave {
+    -webkit-animation-duration: 0.3s;
+    animation-duration: 0.3s;
+    -webkit-animation-name: search-leave;
+    animation-name: search-leave;
+}

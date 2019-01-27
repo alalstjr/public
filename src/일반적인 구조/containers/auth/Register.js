@@ -2,7 +2,7 @@
 import React from 'react';
 import { Authentication } from 'components';
 import { connect } from 'react-redux';
-import { registerRequest } from 'module/auth_api';
+import { registerRequest } from 'actions/auth';
 import { withRouter } from 'react-router-dom';
 
 import $ from 'jquery';
@@ -12,16 +12,15 @@ class Register extends React.Component {
 
     constructor(props) {
         super(props);
+
         this.handleRegister = this.handleRegister.bind(this);
     }
 
     handleRegister(id, pw) {
         return this.props.registerRequest(id, pw).then(
             () => {
-                console.log(this.props.status);
                 if(this.props.status === "SUCCESS") {
                     Materialize.toast('Success! Please log in.', 2000);
-                    console.log('회원가입 성공!');
                     this.props.history.push('/login');
                     return true;
                 } else {
@@ -36,7 +35,7 @@ class Register extends React.Component {
                         'Password is too short',
                         'Username already exists'
                     ];
-                    console.log('회원가입 실패!');
+
                     let $toastContent = $('<span style="color: #FFB4BA">' + errorMessage[this.props.errorCode - 1] + '</span>');
                     Materialize.toast($toastContent, 2000);
                     return false;
@@ -57,7 +56,7 @@ class Register extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        status : state.authentication.register.status,
+        status : state.authentication.register.state,
         errorCode : state.authentication.register.error
     };
 };

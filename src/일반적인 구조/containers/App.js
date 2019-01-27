@@ -1,17 +1,13 @@
 import React from 'react';
 import { Route, withRouter } from "react-router-dom";
 import { Header } from 'components';
-import { Home, Login, Register, Wall } from './';
+import { Home, Login, Register } from './';
 
 import { connect } from 'react-redux';
-import { getStatusRequest, logoutRequest } from 'module/auth_api';
-import { searchRequest } from 'module/search_api';
+import { getStatusRequest, logoutRequest } from 'actions/auth';
 
 import $ from 'jquery';
 import Materialize from 'materialize-css';
-
-import style from '../style/style.css';
-
 
 class App extends React.Component {
 
@@ -80,29 +76,6 @@ class App extends React.Component {
         );
     }
 
-    handleSearch = (username) => {
-        return this.props.searchRequest(username).then(
-            () => {
-                if( this.props.searchStatus !== 'SUCCESS') {
-                    // console.log(JSON.stringify(this.props.searchUsers, null, 4) + '서치');
-
-                    /*
-                        ERROR CODES
-                            1: INVALID ID,
-                            2: EMPTY CONTENTS
-                            3: NOT LOGGED IN
-                            4: NO RESOURCE
-                            5: PERMISSION FAILURE
-                    */
-                    let errorMessage = '검색에 오류가 있습니다.';
-                    // NOTIFY ERROR
-                    console.log(errorMessage);
-                }
-
-            }
-        );
-    }
-
     render() {
 
         /* Check whether current route is login or register using regex */
@@ -116,31 +89,20 @@ class App extends React.Component {
                     <Header 
                         isLoggedIn={this.props.status.isLoggedIn}
                         onLogout={this.handleLogout}
-                        onSearch = {this.handleSearch}
-                        usernames = {this.props.searchUsers}
-                        searchStatus = {this.props.searchStatus}
                     />
                 }
                 <Route exact path="/" component={Home} />
                 <Route path="/home/" component={Home} />
                 <Route path="/login/" component={Login} />
                 <Route path="/register/" component={Register} />
-                <Route path="/wall/:username" component={Wall}/>
             </div>
         );
-        // usernames = {this.props.searchUsers} component 외부에서  this.props. 를 붙인다.
     }
 }
 
 const mapStateToProps = (state) => {
-    // console.log(JSON.stringify(state.search.status, null, 4));   x
-    // console.log(JSON.stringify(state.search.searchHead.status, null, 4));   O
-    // state 의 search 파일의 search 속성의 status를 불러옴
-    
     return {
-        status : state.authentication.status,
-        searchUsers : state.search.searchHead.usernames,
-        searchStatus : state.search.searchHead.status
+        status: state.authentication.status
     };
 };
 
@@ -151,9 +113,6 @@ const mapDispatchToProps = (dispatch) => {
         },
         logoutRequest: () => {
             return dispatch(logoutRequest());
-        },
-        searchRequest : (username) => {
-            return dispatch(searchRequest(username));
         }
     };
 };
