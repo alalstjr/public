@@ -4,6 +4,9 @@ import { Link } from "react-router-dom";
 import { Search } from 'components';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 
+// SVG
+import SVG from 'components/svg/SVG';
+
 class Header extends React.Component {
     constructor(props) {
         super(props);
@@ -29,7 +32,8 @@ class Header extends React.Component {
         const loginButton = (
             <li>
                 <Link to="/login">
-                    <i className="material-icons">vpn_key</i>
+                    <SVG name="login" width="2rem" height="4rem" color="#ffffff" />
+                    <div className="t-h">login</div>
                 </Link>
             </li>
         );
@@ -37,7 +41,8 @@ class Header extends React.Component {
         const logoutButton = (
             <li>
                 <a onClick={this.props.onLogout}>
-                    <i className="material-icons">lock_open</i>
+                    <SVG name="logout" width="2rem" height="4rem" color="#ffffff" />
+                    <div className="t-h">logout</div>
                 </a>
             </li>
         );
@@ -47,16 +52,17 @@ class Header extends React.Component {
                 <nav>
                     <div className="nav-wrapper blue darken-1">
                         <Link to="/" className="brand-logo center">MEMOPAD</Link>
-                        <ul>
+                        <ul className="line">
                             <li>
                                 <a onClick={this.toggleSearch}>
-                                    <i className="material-icons">search</i>
+                                    <SVG name="search" width="2rem" height="4rem" color="#ffffff" />
+                                    <div className="t-h">search</div>
                                 </a>
                             </li>
                         </ul>
 
                         <div className="right">
-                            <ul>
+                            <ul className="line">
                                 { this.props.isLoggedIn ? logoutButton : loginButton }
                             </ul>
                         </div>

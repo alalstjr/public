@@ -3,6 +3,9 @@ import PropTypes from 'prop-types';
 import TimeAgo from 'react-timeago';
 import { Link } from "react-router-dom";
 
+// SVG
+import SVG from 'components/svg/SVG';
+
 export default class Memo extends Component {
 
     constructor(props) {
@@ -152,8 +155,8 @@ export default class Memo extends Component {
     // 노란 색조를 가진 옷차림을 되찾아주세요.
     // 해당 메모가 유저가 star을 한지 안한지 확인하려면, 배열의 indexOf 메소드를 통하여 
     // starred 데이터에 로그인유저의 username이 적혀있는지 확인하면됩니다.
-    let starStyle = (this.props.data.starred.indexOf(this.props.currentUser) > -1) ? { color: '#ff9980' } : {} ;
-
+    let starStyle = (this.props.data.starred.indexOf(this.props.currentUser) > -1) ? { color: '#ff9980' } : { color: '#e9e9e9' } ;
+    
     const memoView = (
         // 나중에 Edit 모드일때는 Write 와 비슷한 뷰를
         // 보여주게 할 것이기 때문에 미리 작업을 한것입니다.
@@ -171,9 +174,14 @@ export default class Memo extends Component {
                 {data.contents}
             </div>
             <div className="footer">
-                <i className="material-icons log-footer-icon star icon-button" 
-                    style={starStyle}
-                    onClick={this.handleStar}>star</i>
+                <a className="log-footer-icon icon-button star" 
+                    onClick={this.handleStar}
+                    href="#none"
+                >
+                    <SVG name="star" width="1.5rem" height="1.5rem" color={starStyle.color} />
+                    <div className="t-h">star</div>
+                </a>
+
                 <span className="star-count">{this.props.data.starred.length}</span>
             </div>
         </div>

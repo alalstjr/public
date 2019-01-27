@@ -175,13 +175,13 @@ ul.search-results {
 }
 
 @media screen and (max-width: 480px) {
-.auth .card {
-    width: 100%;
-}
+    .auth .card {
+        width: 100%;
+    }
 
-.logo {
-    font-size: 60px;
-}
+    .logo {
+        font-size: 60px;
+    }
 }
 
 
@@ -205,4 +205,24 @@ margin-top: 0px;
 .auth .footer {
     border-top: 1px solid #E9E9E9;
     padding-bottom: 21px;
+}
+
+/* Header */
+nav,
+nav ul.line li,
+nav ul.line li a {
+    height: 4rem;
+    line-height: 4rem;
+}
+
+/* 웹 표준 */
+
+/* 텍스트를 숨깁니다. */
+.t-h {  
+    position: absolute;
+    left: -10000px;
+    top:auto;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
 }
