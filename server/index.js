@@ -20,7 +20,7 @@ const db = mongoose.connection;
 db.on('error', console.error);
 db.once('open', () => { console.log('Connected to mongodb server'); });
 // mongoose.connect('mongodb://username:password@host:port/database=');
-mongoose.connect('mongodb://127.0.0.1:27017/?gssapiServiceName=mongodb');
+mongoose.connect(process.env.MONGODB_URI);
 
 /* use session */
 app.use(session({
